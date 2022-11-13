@@ -185,6 +185,7 @@ namespace WebAppPIA.Controllers
             SqlConnection con = new(_configuration.GetConnectionString("ConsultorioApp").ToString());
             SqlCommand cmd = new("UPDATE paciente SET name_paciente='" + pac.name_paciente + "', email_paciente='" + pac.email_paciente + "', phone_paciente='" + pac.phone_paciente + "', id_ciudadPacFK='" + pac.id_ciudadPacFK + "', id_contacto='" + pac.id_contacto + "', id_empleado='" + pac.id_empleado + "'WHERE id_paciente='" + pacienteID + "'", con);
             con.Open();
+
             int i = cmd.ExecuteNonQuery();
             con.Close();
             response response = new response();

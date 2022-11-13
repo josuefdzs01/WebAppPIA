@@ -48,25 +48,30 @@ namespace WebAppPIA.Controllers
         public string GetConsultorio(string userID)
         {
             SqlConnection con = new SqlConnection(_configuration.GetConnectionString("ConsultorioApp").ToString());
-            SqlDataAdapter da = new SqlDataAdapter("select * from empleado where(id_consul = '"+ userID +"')", con);
+            SqlDataAdapter da = new SqlDataAdapter("select * from DocFull where(id_consul = '" + userID +"')", con);
             DataTable dt = new DataTable();
             da.Fill(dt);
-            List<empleados> consulList = new List<empleados>();
+            List<empleadosMostrar> consulList = new List<empleadosMostrar>();
             response response = new response();
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    empleados empleados = new empleados();
+                    empleadosMostrar empleados = new empleadosMostrar();
                     empleados.id_empleado = Convert.ToInt32(dt.Rows[i]["id_empleado"]);
-                    empleados.name_empleado = Convert.ToString(dt.Rows[i]["name_empleado"]);
-                    empleados.email_empleado = Convert.ToString(dt.Rows[i]["email_empleado"]);
-                    empleados.phone_empleado = Convert.ToString(dt.Rows[i]["phone_empleado"]);
-                    empleados.created_at = Convert.ToDateTime(dt.Rows[i]["created_at"]);
-                    empleados.password_empleado = Convert.ToString(dt.Rows[i]["password_empleado"]);
-                    empleados.id_ciudadEmpFK = Convert.ToInt32(dt.Rows[i]["id_ciudadEmpFK"]);
+                    empleados.nombre_emp = Convert.ToString(dt.Rows[i]["nombre_emp"]);
+                    empleados.email_emp = Convert.ToString(dt.Rows[i]["email_emp"]);
+                    empleados.phone_emp = Convert.ToString(dt.Rows[i]["phone_emp"]);
+                    empleados.dado_alta= Convert.ToDateTime(dt.Rows[i]["dado_alta"]);
+                    empleados.contraseña = Convert.ToString(dt.Rows[i]["contraseña"]);
+                    empleados.id_ciudadEmp = Convert.ToInt32(dt.Rows[i]["id_ciudadEmp"]);
+                    empleados.nombre_city = Convert.ToString(dt.Rows[i]["nombre_city"]);
                     empleados.id_turno = Convert.ToInt32(dt.Rows[i]["id_turno"]);
+                    empleados.name_horario = Convert.ToString(dt.Rows[i]["name_horario"]);
+                    empleados.horas = Convert.ToString(dt.Rows[i]["horas"]);
                     empleados.id_puesto = Convert.ToInt32(dt.Rows[i]["id_puesto"]);
+                    empleados.name_puesto = Convert.ToString(dt.Rows[i]["name_puesto"]);
+                    empleados.id_consul = Convert.ToInt32(dt.Rows[i]["id_consul"]);
                     consulList.Add(empleados);
                 }
             }

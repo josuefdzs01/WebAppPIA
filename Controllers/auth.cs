@@ -49,7 +49,7 @@ namespace WebAppPIA.Controllers
         public string login(string user, string password)
         {
             SqlConnection con = new(_configuration.GetConnectionString("ConsultorioApp").ToString());
-            SqlDataAdapter da = new("SELECT * FROM consultorio WHERE (email_consul = '"+ user +"' AND  password_consul = '"+ password +"')", con);
+            SqlDataAdapter da = new("SELECT * FROM CscCity WHERE (Correo = '" + user +"' AND  Contraseña = '"+ password +"')", con);
             DataTable dt = new DataTable();
             response response = new response();
             da.Fill(dt);
@@ -59,13 +59,14 @@ namespace WebAppPIA.Controllers
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     consultorio consul = new consultorio();
-                    consul.id_consul = Convert.ToInt32(dt.Rows[i]["id_consul"]);
-                    consul.name_consul = Convert.ToString(dt.Rows[i]["name_consul"]);
-                    consul.email_consul = Convert.ToString(dt.Rows[i]["email_consul"]);
-                    consul.phone_consul = Convert.ToString(dt.Rows[i]["phone_consul"]);
-                    consul.created_at = Convert.ToDateTime(dt.Rows[i]["created_at"]);
-                    consul.password_consul = Convert.ToString(dt.Rows[i]["password_consul"]);
-                    consul.id_ciudadFK = Convert.ToInt32(dt.Rows[i]["id_ciudadFK"]);
+                    consul.ID = Convert.ToInt32(dt.Rows[i]["ID"]);
+                    consul.Nombre = Convert.ToString(dt.Rows[i]["Nombre"]);
+                    consul.Correo = Convert.ToString(dt.Rows[i]["Correo"]);
+                    consul.Telefono = Convert.ToString(dt.Rows[i]["Telefono"]);
+                    consul.Dado_Alta = Convert.ToDateTime(dt.Rows[i]["Dado_Alta"]);
+                    consul.Contraseña = Convert.ToString(dt.Rows[i]["Contraseña"]);
+                    consul.ID_Ciudad = Convert.ToInt32(dt.Rows[i]["ID_Ciudad"]);
+                    consul.Ciudad = Convert.ToString(dt.Rows[i]["Ciudad"]);
                     consulList.Add(consul);
                 }
                 response.StatusCode = 200;

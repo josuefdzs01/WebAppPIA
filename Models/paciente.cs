@@ -41,5 +41,11 @@
         public int id_ciudadCont { get; set; }
         public string name_cityCont { get; set; }
         public int id_emp { get; set; }
+        public string nombre_emp { get; set; }
+        public string email_emp { get; set; }
+        public string phone_emp { get; set; }
+        public int id_turno { get; set; }
+        public string name_horario { get; set; }
+        public string horas { get; set; }
     }
 }

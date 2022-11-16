@@ -117,6 +117,7 @@ namespace WebAppPIA.Controllers
                     empleados.id_ciudadEmpFK = Convert.ToInt32(dt.Rows[i]["id_ciudadEmpFK"]);
                     empleados.id_turno = Convert.ToInt32(dt.Rows[i]["id_turno"]);
                     empleados.id_puesto = Convert.ToInt32(dt.Rows[i]["id_puesto"]);
+                    empleados.id_consul = Convert.ToInt32(dt.Rows[i]["id_consul"]);
                     consulList.Add(empleados);
                 }
                 response.StatusCode = 200;

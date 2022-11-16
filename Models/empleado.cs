@@ -31,4 +31,15 @@
         public string name_puesto { get; set; }
         public int id_consul { get; set; }
     }
+
+    public class doctores
+    {
+        public int id_empleado { get; set; }
+        public string nombre_emp { get; set; }
+        public int id_turno { get; set; }
+        public string name_horario { get; set; }
+        public string horas { get; set; }
+        public int id_puesto { get; set; }
+        public string name_puesto { get; set; }
+    }
 }

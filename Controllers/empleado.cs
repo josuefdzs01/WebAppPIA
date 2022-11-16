@@ -87,6 +87,43 @@ namespace WebAppPIA.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getDoctor/doctor/{id}/idConsul/{idConsul}")]
+        public string GetAllDoctor(string id, string idConsul)
+        {
+            SqlConnection con = new SqlConnection(_configuration.GetConnectionString("ConsultorioApp").ToString());
+            SqlDataAdapter da = new SqlDataAdapter("select * from DocHorario where(id_puesto = '" + id +"' and id_consul = '"+idConsul+"')", con);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            List<doctores> consulList = new List<doctores>();
+            response response = new response();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    doctores empleados = new doctores();
+                    empleados.id_empleado = Convert.ToInt32(dt.Rows[i]["id_empleado"]);
+                    empleados.nombre_emp = Convert.ToString(dt.Rows[i]["nombre_emp"]);
+                    empleados.id_turno = Convert.ToInt32(dt.Rows[i]["id_turno"]);
+                    empleados.name_horario = Convert.ToString(dt.Rows[i]["name_horario"]);
+                    empleados.horas = Convert.ToString(dt.Rows[i]["horas"]);
+                    empleados.id_puesto = Convert.ToInt32(dt.Rows[i]["id_puesto"]);
+                    empleados.name_puesto = Convert.ToString(dt.Rows[i]["name_puesto"]);
+                    consulList.Add(empleados);
+                }
+            }
+            if (consulList.Count > 0)
+            {
+                return JsonConvert.SerializeObject(consulList);
+            }
+            else
+            {
+                response.StatusCode = 100;
+                response.ErrorMessage = "No hay informacion almacenada";
+                return JsonConvert.SerializeObject(response);
+            }
+        }
+
         [HttpDelete]
         [Route("delete/userID/{userID}/")]
         public string deleteEmp(int userID)
